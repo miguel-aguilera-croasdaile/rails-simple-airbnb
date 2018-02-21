@@ -1,0 +1,46 @@
+<div class="navbar">
+  <div class="menu">
+   <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search" value="" id="search">
+   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+   <%= link_to "Add A Flat", new_flat_path %>
+ </div>
+</div>
+
+<div class="title">
+  <h1>All our Flats</h1>
+  <p>We found 3 flats out of our 3 on our website.</p>
+</div>
+
+<div class="container">
+
+  <div class="row">
+    <% @flats.each do |flat| %>
+    <div class="col-xs-12 col-sm-6 col-md-3">
+      <div class="flat-card">
+        <div class="flat-card-content">
+          <div class="flat-card-title">
+            <h4><%= link_to flat.name, flat_path(flat) %></h4>
+          </div>
+          <p><%=flat.address %></p>
+          <div class="flex">
+            <div class="flex">
+              <i class="material-icons mr-2">people </i><span>
+                <p> <%= flat.number_of_guests %></p>
+              </span>
+            </div>
+            <div class="flex ml-3">
+              <i class="material-icons mr-2">euro_symbol</i>
+              <p> <%= flat.price_per_night %></p>
+            </div>
+          </div>
+        </div>
+        <div class="flat-card-actions">
+          <%= link_to "More Info" , flat_path(flat) %>
+          <%= link_to "Edit", edit_flat_path(flat, :class => "ml-3 text-warning")  %>
+          <%= link_to 'Delete', flat_path(flat), method: :delete, data: { confirm: 'Are you sure?' }, :class => "ml-3 text-danger" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
